@@ -10,7 +10,7 @@ import (
 	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
-	_ "github.com/joho/godotenv/autoload" // this is just for use in local dev not for real hosting figure it out when its time to remove this lol
+	// _ "github.com/joho/godotenv/autoload" // this is just for use in local dev not for real hosting figure it out when its time to remove this lol
 )
 
 // Service represents a service that interacts with a database.
