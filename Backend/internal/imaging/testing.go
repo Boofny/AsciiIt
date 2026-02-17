@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"net/url"
 	"strings"
 )
 
@@ -14,10 +15,15 @@ func main() {
 		return
 	}
 	defer resp.Body.Close()
-	rr := resp.Header
+	// rr := resp.Header
 
-	fmt.Println(rr)
+	// fmt.Println(rr)
 	r := "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/14235/production/_100058428_mediaitem100058424.jpg"
+	s, err := url.Parse(r)
+	if err != nil {
+		return 
+	}
+	fmt.Println(s)
 
 	t, err := isImageURL(r)
 	if err != nil {
@@ -26,6 +32,7 @@ func main() {
 	fmt.Println(t)
 }
 
+// think in the saftey way that anyone can send an image file with a malware code in the image file
 func isImageURL(url string) (bool, error) {
 	resp, err := http.Head(url) // Use HEAD request to get headers only
 	if err != nil {
