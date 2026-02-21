@@ -8,9 +8,10 @@ import (
 	"fmt"
 	"image"
 	"net/http"
+	"os"
 
 	_ "image/jpeg" // Import for JPEG support
-	_ "image/png"  // Import for PNG support
+	_ "image/png" // Import for PNG support
 )
 
 // asciiChars represents an ordered set of characters from dark to light const asciiChars = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
@@ -61,6 +62,20 @@ func main() {
 		}
 		fmt.Println()
 	}
+
+	f, err := os.Create("out.text")
+	if err != nil {
+		return
+	}
+	defer f.Close()
+
+	for x := range arr {
+		for _, i := range arr[x] {
+			fmt.Fprint(f, i)	
+		}
+			fmt.Fprintln(f, "")	
+	}
+
 }
 
 func GrayScaleImage(outputHeight, outputWidth, height, width int, img image.Image)[][]string{
